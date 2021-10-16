@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="zh-cmn-Hans">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no"/>
+		<meta name="renderer" content="webkit"/>
+		<meta name="force-rendering" content="webkit"/>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+
+		<!-- MDUI CSS -->
+		<link
+		rel="stylesheet"
+		href="https://cdn.jsdelivr.net/npm/mdui@1.0.1/dist/css/mdui.min.css"
+		integrity="sha384-cLRrMq39HOZdvE0j6yBojO4+1PrHfB7a9l5qLcmRm/fiWXYY+CndJPmyu5FV/9Tw"
+		crossorigin="anonymous"
+		/>
+		<title>服务器实时状态</title>
+	</head>
+	<body class="mdui-theme-primary-indigo mdui-theme-accent-pink mdui-theme-layout-auto">
+	
+		<!-- MDUI header -->
+		<div class="mdui-appbar">
+				<div class="mdui-toolbar-spacer"></div>
+				</a>
+			</div>
+		</div>
+	
+		<!-- MDUI boder -->
+		<div class="mdui-container doc-container" style="height: auto !important;">
+			<br><br><br>
+		</style>
+	</head>
+	<body background="img/black.png" >
+			<br>
+			<div class="mdui-typo">
+				<div class="mdui-table-fluid">
+					<table class="mdui-table">
+						<thead>
+							<tr>
+								<th>EasyArea二服（纯生存服）</th>
+								<th class="mdui-table-col-numeric">状态</th>
+							</tr>
+						</thead>
+						<tbody>					
+							<tr>
+								<td>服务器状态</td>
+								<td><div class="mdui-typo-title" id="status">等待加载</div></td>
+							</tr>						
+							<tr>
+								<td>在线人数</td>
+								<td><div class="mdui-typo-title"><small id="online">等待加载</small>/<small id="max">等待加载</small></div></td>
+							</tr>
+							<tr>
+								<td>有效延时</td>
+								<td><div class="mdui-typo-title" id="delay">等待加载</div>ms</td>
+							</tr>						
+						</tbody>
+					</table>
+				</div>
+			</div>
+		
+		<!-- AJAX JavaScript -->
+		<script src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
+		<script type="text/javascript">
+		var getting = {
+			url:'https://motdpe.blackbe.xyz/api.php?ip=play.easyareamc.cn&port=40002',
+			dataType:'json',
+			success:function(res) {
+				console.log(res);
+				if(res.code=200){
+					$("#status").html(res.status);
+					$("#ip").html(res.ip);
+					$("#port").html(res.port);
+					$("#agreement").html(res.agreement);
+					$("#real").html(res.real);
+					$("#location").html(res.location);
+					$("#motd").html(res.motd);
+					$("#version").html(res.version);
+					$("#online").html(res.online);
+					$("#max").html(res.max);
+					$("#gamemode").html(res.gamemode);
+					$("#delay").html(res.delay);
+				}else{
+					$("#status").html(无法连接);
+					$("#ip").html(无法连接);
+					$("#port").html(无法连接);
+					$("#agreement").html(无法连接);
+					$("#real").html(无法连接);
+					$("#location").html(无法连接);
+					$("#motd").html(无法连接);
+					$("#version").html(无法连接);
+					$("#online").html(无法连接);
+					$("#max").html(无法连接);
+					$("#gamemode").html(无法连接);
+					$("#delay").html(无法连接);
+				}
+			}
+		};
+		//关键在这里，Ajax定时访问服务端，不断获取数据 ，这里是1秒请求一次。
+		window.setInterval(function(){$.ajax(getting)},1000);
+		</script>
+		
+		<!-- MDUI JavaScript -->
+		<script
+		src="https://cdn.jsdelivr.net/npm/mdui@1.0.1/dist/js/mdui.min.js"
+		integrity="sha384-gCMZcshYKOGRX9r6wbDrvF+TcCCswSHFucUzUPwka+Gr+uHgjlYvkABr95TCOz3A"
+		crossorigin="anonymous"
+		></script>
+	</body>
+</html>
